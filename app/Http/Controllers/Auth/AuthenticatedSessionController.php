@@ -22,26 +22,57 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+ public function rules(): array
+{
+    return [
+        'login'    => ['required', 'string'],
+        'password' => ['required', 'string'],
+    ];
+}
+
+    public function authenticate(): void
     {
-        $request->authenticate();
+        $this->ensureIsNotRateLimited();
 
-        $request->session()->regenerate();
+        // Cek apakah input berupa email atau nomor telepon
+        $field = filter_var($this->input('login'), FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'no_telepon';
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if (! Auth::attempt(
+            [$field => $this->input('login'), 'password' => $this->input('password')],
+            $this->boolean('remember')
+        )) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'login' => trans('auth.failed'),
+            ]);
+        }
+
+        RateLimiter::clear($this->throttleKey());
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function ensureIsNotRateLimited(): void
     {
-        Auth::guard('web')->logout();
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+            return;
+        }
 
-        $request->session()->invalidate();
+        event(new Lockout($this));
 
-        $request->session()->regenerateToken();
+        $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        return redirect('/');
+        throw ValidationException::withMessages([
+            'login' => trans('auth.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / 60),
+            ]),
+        ]);
+    }
+
+    public function throttleKey(): string
+    {
+        return Str::transliterate(Str::lower($this->string('login')).'|'.$this->ip());
     }
 }
