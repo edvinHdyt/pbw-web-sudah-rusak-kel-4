@@ -23,7 +23,7 @@ class Roles extends Model {
             'id_role',
             'id_user'
         )
-        ->using(UserRole::class)
+        ->using(UserRoles::class)
         ->withPivot('id_user_role')
         ->withTimestamps();
     }

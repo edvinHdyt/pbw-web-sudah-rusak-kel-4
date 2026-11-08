@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Users_Roles extends Pivot {
+class UserRoles extends Pivot {
     use HasUuids;
-    protected $table = 'users_roles';
+    protected $table = 'user_roles';
     protected $primaryKey = 'id_user_role';
     public $incrementing = false;
     protected $keyType = 'string';
@@ -28,7 +28,7 @@ class Users_Roles extends Pivot {
 
     public function role(): BelongsTo {
         return $this->belongsTo(
-            Role::class,
+            Roles::class,
             'id_role',
             'id_role'
         );

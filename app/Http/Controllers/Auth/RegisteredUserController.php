@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Roles;
 use App\Models\User;
+use App\Models\UserRoles;
+use App\Models\Users;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,20 +50,24 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            // echo $user->get();
+            $dataRole = Roles::where("nama_role", "admin")->get();
+            $idRole = "";
 
-            // $role = Role::where("role", "admin");
+            foreach ($dataRole as $key => $val) {
+                $idRole = $val->id_roles;
+            }
 
-            // UserRole::create([
-            //     'id_user' => $user->id,
-            //     'id_role' => $role->id
-            // ]);
+            UserRoles::create([
+                'id_user' => $user->id_user,
+                'id_role' => $idRole
+            ]);
 
-            // event(new Registered($user));
+            event(new Registered($user));
 
-            // Auth::login($user);
+            Auth::login($user);
 
-            return redirect(route('verification.send', absolute: false));
+            // return redirect(route('verification.send', [],307));
+            return json_encode("registred");
         } catch (\Throwable $th) {
 
             return json_encode(["error", $th->getMessage()]);

@@ -6,10 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Foundation\Auth\Users as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Users extends Authenticatable implements MustVerifyEmail {
+class User extends Authenticatable implements MustVerifyEmail{
     use HasFactory, Notifiable, HasUuids;
     protected $table = 'users';
     protected $primaryKey = 'id_user';
@@ -37,12 +37,12 @@ class Users extends Authenticatable implements MustVerifyEmail {
 
     public function roles(): BelongsToMany {
         return $this->belongsToMany(
-            Role::class,
+            Roles::class,
             'users_roles',
             'id_user',
             'id_role'
         )
-        ->using(Users_Roles::class)
+        ->using(UserRoles::class)
         ->withPivot('id_user_role')
         ->withTimestamps();
     }
