@@ -1,31 +1,51 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <div class="mb-5 text-center">
+        <h1 class="text-2xl font-bold tracking-tight text-black">Verifikasi Email</h1>
+
+        @if (session('status') == 'verification-link-sent')
+            <p class="text-xs text-green-700 mt-2 max-w-xs mx-auto leading-relaxed">
+                Link verifikasi baru telah dikirim ke alamat email Anda.
+            </p>
+        @elseif (auth()->user() && auth()->user()->hasVerifiedEmail())
+            <p class="text-xs text-gray-700 mt-2 max-w-xs mx-auto leading-relaxed">
+                Email anda telah terverifikasi! (Otomatis diarahkan dalam 5 detik...)
+            </p>
+            <script>
+                setTimeout(function() {
+                    window.location.href = "{{ route('dashboard') }}";
+                }, 5000);
+            </script>
+        @else
+            <p class="text-xs text-gray-700 mt-2 max-w-xs mx-auto leading-relaxed">
+                Tekan tombol ini untuk verifikasi email anda!
+            </p>
+        @endif
     </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+    @if (auth()->user() && auth()->user()->hasVerifiedEmail())
+        <div class="space-y-3 pt-2">
+            <a href="{{ route('dashboard') }}"
+               class="w-full py-2.5 px-4 rounded-md bg-[#BFBFBF] hover:bg-[#AFAFAF] active:bg-[#9F9F9F] border border-gray-400 text-sm font-medium text-black shadow-sm transition-colors text-center block">
+                Kembali ke Dashboard
+            </a>
+        </div>
+    @else
+        <div class="space-y-3 pt-2">
+            <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <button type="submit"
+                        class="w-full py-2.5 px-4 rounded-md bg-[#BFBFBF] hover:bg-[#AFAFAF] active:bg-[#9F9F9F] border border-gray-400 text-sm font-medium text-black shadow-sm transition-colors text-center block">
+                    Verifikasi
+                </button>
+            </form>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                        class="w-full py-2.5 px-4 rounded-md bg-white hover:bg-gray-50 active:bg-gray-100 border border-gray-400 text-sm font-medium text-black shadow-sm transition-colors text-center block">
+                    Keluar
+                </button>
+            </form>
         </div>
     @endif
-
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
-    </div>
 </x-guest-layout>
