@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\TryCatch;
 
 class RegisteredUserController extends Controller
 {
@@ -28,24 +29,42 @@ class RegisteredUserController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'nama' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:50', 'unique:'.User::class],
+            'alamat' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            $user = User::create([
+                'nama' => $request->nama,
+                'email' => $request->email,
+                "alamat" => $request->alamat,
+                "no_telpon" => $request->no_telpon,
+                'password' => Hash::make($request->password),
+            ]);
 
-        event(new Registered($user));
+            // echo $user->get();
 
-        Auth::login($user);
+            // $role = Role::where("role", "admin");
 
-        return redirect(route('dashboard', absolute: false));
+            // UserRole::create([
+            //     'id_user' => $user->id,
+            //     'id_role' => $role->id
+            // ]);
+
+            // event(new Registered($user));
+
+            // Auth::login($user);
+
+            return redirect(route('verification.send', absolute: false));
+        } catch (\Throwable $th) {
+
+            return json_encode(["error", $th->getMessage()]);
+        }
+
     }
 }
