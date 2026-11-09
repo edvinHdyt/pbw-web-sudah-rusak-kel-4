@@ -34,7 +34,6 @@ class AuthenticatedSessionController extends Controller
     {
         $this->ensureIsNotRateLimited();
 
-        // Cek apakah input berupa email atau nomor telepon
         $field = filter_var($this->input('login'), FILTER_VALIDATE_EMAIL)
             ? 'email'
             : 'no_telepon';
