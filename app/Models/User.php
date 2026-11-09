@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
-{
+class User extends Authenticatable implements MustVerifyEmail{
     use HasFactory, Notifiable, HasUuids;
-
     protected $table = 'users';
     protected $primaryKey = 'id_user';
     public $incrementing = false;
     protected $keyType = 'string';
-
     protected $fillable = [
         'nama',
         'email',
@@ -31,19 +28,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
-    public function roles(): BelongsToMany
-    {
+    public function roles(): BelongsToMany {
         return $this->belongsToMany(
             Roles::class,
-            'user_roles',
+            'users_roles',
             'id_user',
             'id_role'
         )
@@ -52,15 +47,13 @@ class User extends Authenticatable implements MustVerifyEmail
         ->withTimestamps();
     }
 
-    public function hasRole(string $role): bool
-    {
+    public function hasRole(string $role): bool {
         return $this->roles()
             ->where('nama_role', $role)
             ->exists();
     }
 
-    public function hasAnyRole(array $roles): bool
-    {
+    public function hasAnyRole(array $roles): bool {
         return $this->roles()
             ->whereIn('nama_role', $roles)
             ->exists();

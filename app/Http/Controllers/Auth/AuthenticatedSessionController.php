@@ -22,56 +22,26 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
- public function rules(): array
-{
-    return [
-        'login'    => ['required', 'string'],
-        'password' => ['required', 'string'],
-    ];
-}
-
-    public function authenticate(): void
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $this->ensureIsNotRateLimited();
+        $request->authenticate();
 
-        $field = filter_var($this->input('login'), FILTER_VALIDATE_EMAIL)
-            ? 'email'
-            : 'no_telepon';
+        $request->session()->regenerate();
 
-        if (! Auth::attempt(
-            [$field => $this->input('login'), 'password' => $this->input('password')],
-            $this->boolean('remember')
-        )) {
-            RateLimiter::hit($this->throttleKey());
-
-            throw ValidationException::withMessages([
-                'login' => trans('auth.failed'),
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
-    public function ensureIsNotRateLimited(): void
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroy(Request $request): RedirectResponse
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-            return;
-        }
+        Auth::guard('web')->logout();
 
-        event(new Lockout($this));
+        $request->session()->invalidate();
 
-        $seconds = RateLimiter::availableIn($this->throttleKey());
+        $request->session()->regenerateToken();
 
-        throw ValidationException::withMessages([
-            'login' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
-        ]);
-    }
-
-    public function throttleKey(): string
-    {
-        return Str::transliterate(Str::lower($this->string('login')).'|'.$this->ip());
+        return redirect('/');
     }
 }

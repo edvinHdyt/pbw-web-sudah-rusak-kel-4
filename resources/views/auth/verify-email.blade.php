@@ -13,7 +13,10 @@
             </script>
         @else
             <p class="text-sm text-black leading-relaxed">
-                Tekan tombol ini untuk verifikasi email anda!
+                Verifkasi email telah dikirim ke email anda, mohon konfirmasi terlebih dahulu!
+            </p>
+            <p class="text-sm text-black leading-relaxed">
+                Kirim ulang email? tekan tombol dibawah ini.
             </p>
         @endif
     </div>

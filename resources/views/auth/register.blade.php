@@ -107,7 +107,6 @@
 
         <!-- Sudah punya akun? Masuk -->
         <div class="pt-2 text-center text-sm text-black font-normal">
-            Sudah punya akun?
             <a href="{{ route('login') }}" class="font-bold text-black hover:underline">
                 Masuk
             </a>
