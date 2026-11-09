@@ -41,7 +41,7 @@
         </div>
 
         <div class="bg-white shadow mt-4">
-        <button type="submit" class="mt-4 w-full py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-black-50 text-sm transition">
+        <button type="submit" class="mt-4 w-full py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-white text-sm transition bg-indigo-500">
             Daftar
         </button>
         </div>
