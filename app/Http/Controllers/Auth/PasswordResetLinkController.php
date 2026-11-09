@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -26,13 +27,23 @@ class PasswordResetLinkController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $input = $request->input('email');
+
+        // If input is not an email, try resolving user by phone number
+        if ($input && !filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('no_telpon', $input)->first();
+            if ($user) {
+                $request->merge(['email' => $user->email]);
+            }
+        }
+
         $request->validate([
             'email' => ['required', 'email'],
+        ], [
+            'email.email' => 'Nomor telepon atau email tidak valid.',
+            'email.required' => 'Email atau nomor telepon wajib diisi.',
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
         $status = Password::sendResetLink(
             $request->only('email')
         );

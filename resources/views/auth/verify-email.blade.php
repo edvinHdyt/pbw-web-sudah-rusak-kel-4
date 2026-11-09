@@ -1,31 +1,39 @@
 <x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <div class="mb-6 text-center">
+        <h1 class="text-2xl font-bold tracking-normal text-black mb-3">Verifikasi Email</h1>
+
+        @if (auth()->user() && auth()->user()->hasVerifiedEmail())
+            <p class="text-sm text-black leading-relaxed">
+                Email anda telah terverifikasi!
+            </p>
+            <script>
+                setTimeout(function() {
+                    window.location.href = "{{ route('dashboard') }}";
+                }, 5000);
+            </script>
+        @else
+            <p class="text-sm text-black leading-relaxed">
+                Tekan tombol ini untuk verifikasi email anda!
+            </p>
+        @endif
     </div>
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+    @if (auth()->user() && auth()->user()->hasVerifiedEmail())
+        <div class="pt-2 text-center">
+            <a href="{{ route('dashboard') }}"
+               class="inline-block w-64 py-2.5 px-4 rounded-[4px] bg-[#BFBFBF] hover:bg-[#B3B3B3] active:bg-[#A6A6A6] border border-[#7F7F7F] text-sm font-normal text-black shadow-[0_2px_3px_rgba(0,0,0,0.2)] transition-colors text-center">
+                Kembali ke Dashboard
+            </a>
+        </div>
+    @else
+        <div class="pt-2 text-center">
+            <form method="POST" action="{{ route('verification.send') }}">
+                @csrf
+                <button type="submit"
+                        class="inline-block w-64 py-2.5 px-4 rounded-[4px] bg-[#BFBFBF] hover:bg-[#B3B3B3] active:bg-[#A6A6A6] border border-[#7F7F7F] text-sm font-normal text-black shadow-[0_2px_3px_rgba(0,0,0,0.2)] transition-colors text-center">
+                    Verifikasi
+                </button>
+            </form>
         </div>
     @endif
-
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
-            </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
-    </div>
 </x-guest-layout>

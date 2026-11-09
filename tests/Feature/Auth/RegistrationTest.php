@@ -2,6 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Roles;
+use App\Models\User;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,14 +21,25 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
+        $this->seed(RoleSeeder::class);
+
         $response = $this->post('/register', [
-            'name' => 'Test User',
+            'nama' => 'Test User',
+            'no_telpon' => '081234567890',
             'email' => 'test@example.com',
+            'alamat' => 'Bekasi Timur',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
 
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard', absolute: false));
+
+        $user = User::where('email', 'test@example.com')->first();
+        $this->assertNotNull($user);
+        $this->assertSame('Test User', $user->nama);
+        $this->assertSame('081234567890', $user->no_telpon);
+        $this->assertSame('Bekasi Timur', $user->alamat);
+        $this->assertTrue($user->hasRole('admin'));
     }
 }

@@ -1,49 +1,116 @@
 <x-guest-layout>
-    <h1 class="text-center text-2xl font-bold text-gray-900">SudahRusak</h1>
-    <p class="text-center text-m text-gray-700"> Silahkan verifikasi email Anda! </p>
-    <form method="POST" action="{{ route('register') }}">
+    <div class="mb-6 text-center">
+        <h1 class="text-3xl font-bold tracking-normal text-black">SudahRusak</h1>
+        @if (session('status'))
+            <p class="text-sm text-black mt-2">Silahkan verifikasi email anda!</p>
+        @endif
+    </div>
+
+    <form method="POST" action="{{ route('register') }}" class="space-y-3.5">
         @csrf
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="name" value="Nama Lengkap" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <!-- Nama Lengkap -->
+        <div>
+            <label for="nama" class="block text-sm font-normal text-black mb-1">
+                Nama Lengkap
+            </label>
+            <input id="nama"
+                   type="text"
+                   name="nama"
+                   value="{{ old('nama') }}"
+                   required
+                   autofocus
+                   autocomplete="name"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('nama')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="no_telepon" value="No telepon" />
-            <x-text-input id="no_telepon" class="block mt-1 w-full" type="tel" name="no_telepon" :value="old('no_telepon')" required autocomplete="tel" />
-            <x-input-error :messages="$errors->get('no_telepon')" class="mt-2" />
+        <!-- No telepon -->
+        <div>
+            <label for="no_telpon" class="block text-sm font-normal text-black mb-1">
+                No telepon
+            </label>
+            <input id="no_telpon"
+                   type="tel"
+                   name="no_telpon"
+                   value="{{ old('no_telpon') }}"
+                   autocomplete="tel"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('no_telpon')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="email" value="Email" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-normal text-black mb-1">
+                Email
+            </label>
+            <input id="email"
+                   type="email"
+                   name="email"
+                   value="{{ old('email') }}"
+                   required
+                   autocomplete="username"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('email')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="alamat" value="Alamat" />
-            <x-text-input id="alamat" class="block mt-1 w-full" type="text" name="alamat" :value="old('alamat')" required autocomplete="street-address" />
-            <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
+        <!-- Alamat -->
+        <div>
+            <label for="alamat" class="block text-sm font-normal text-black mb-1">
+                Alamat
+            </label>
+            <input id="alamat"
+                   type="text"
+                   name="alamat"
+                   value="{{ old('alamat') }}"
+                   required
+                   autocomplete="street-address"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('alamat')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="password" value="Kata Sandi" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Kata Sandi -->
+        <div>
+            <label for="password" class="block text-sm font-normal text-black mb-1">
+                Kata Sandi
+            </label>
+            <input id="password"
+                   type="password"
+                   name="password"
+                   required
+                   autocomplete="new-password"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('password')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-            <x-input-label for="password_confirmation" value="Konfirmasi Kata Sandi" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <!-- Konfirmasi Kata Sandi -->
+        <div>
+            <label for="password_confirmation" class="block text-sm font-normal text-black mb-1">
+                Konfirmasi Kata Sandi
+            </label>
+            <input id="password_confirmation"
+                   type="password"
+                   name="password_confirmation"
+                   required
+                   autocomplete="new-password"
+                   class="block w-full rounded-[4px] border border-[#7F7F7F] bg-white px-3 py-2 text-sm text-black shadow-[0_1px_2px_rgba(0,0,0,0.15)] focus:border-black focus:outline-none focus:ring-0" />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1" />
         </div>
 
-        <div class="bg-white shadow mt-4">
-        <button type="submit" class="mt-4 w-full py-2 rounded-md bg-gray-300 hover:bg-gray-400 text-white text-sm transition bg-indigo-500">
-            Daftar
-        </button>
+        <!-- Daftar Button -->
+        <div class="pt-3">
+            <button type="submit"
+                    class="w-full py-2.5 px-4 rounded-[4px] bg-[#BFBFBF] hover:bg-[#B3B3B3] active:bg-[#A6A6A6] border border-[#7F7F7F] text-sm font-normal text-black shadow-[0_2px_3px_rgba(0,0,0,0.2)] transition-colors text-center block">
+                Daftar
+            </button>
+        </div>
+
+        <!-- Sudah punya akun? Masuk -->
+        <div class="pt-2 text-center text-sm text-black font-normal">
+            Sudah punya akun?
+            <a href="{{ route('login') }}" class="font-bold text-black hover:underline">
+                Masuk
+            </a>
         </div>
 
 
