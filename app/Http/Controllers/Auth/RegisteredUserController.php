@@ -68,7 +68,7 @@ class RegisteredUserController extends Controller
 
            return redirect(route('dashboard', absolute: false));
         } catch (\Throwable $th) {
-            return json_encode(["error", $th->getMessage()]);
+            return back()->with('error', $th->getMessage());
         }
 
     }
