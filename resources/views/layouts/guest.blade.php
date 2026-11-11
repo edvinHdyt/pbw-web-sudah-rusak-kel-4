@@ -14,12 +14,21 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-  <header class="relative z-10 w-full h-8 bg-white shadow-2xl"></header>
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 bg-indigo-50">
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <body class="font-sans text-gray-900 antialiased bg-indigo-50 min-h-screen flex flex-col">
+        <!-- Header with shadow & branding -->
+        <header class="w-full h-16 bg-white shadow-md border-b border-gray-100 flex items-center px-6 sm:px-12 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
+                <a href="/" class="text-xl font-bold tracking-tight text-gray-900 hover:text-indigo-600 transition">
+                    Sudah<span class="text-indigo-600">Rusak</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main container with shadow card -->
+        <main class="flex-1 flex flex-col sm:justify-center items-center py-8 sm:py-12 px-4 sm:px-6">
+            <div class="w-full sm:max-w-md bg-white shadow-xl border border-gray-100 rounded-2xl p-6 sm:p-8">
                 {{ $slot }}
             </div>
-        </div>
+        </main>
     </body>
 </html>
