@@ -38,9 +38,11 @@ class User extends Authenticatable implements MustVerifyEmail{
     public function roles(): BelongsToMany {
         return $this->belongsToMany(
             Roles::class,
-            'users_roles',
+            'user_roles',
             'id_user',
-            'id_role'
+            'id_role',
+            'id_user',
+            'id_roles'
         )
         ->using(UserRoles::class)
         ->withPivot('id_user_role')

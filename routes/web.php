@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Modul Customer: Tracking & Landing page (tanpa login)
+Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+Route::post('/lacak-service/{id}', [CustomerController::class, 'update'])->name('customer.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
