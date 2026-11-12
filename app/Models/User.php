@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
+use Override;
 
-class User extends Authenticatable implements MustVerifyEmail{
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasName{
     use HasFactory, Notifiable, HasUuids;
     protected $table = 'users';
     protected $primaryKey = 'id_user';
@@ -57,5 +61,15 @@ class User extends Authenticatable implements MustVerifyEmail{
         return $this->roles()
             ->whereIn('nama_role', $roles)
             ->exists();
+    }
+
+    #[Override]
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+
+    public function getFilamentName():string{
+        return $this->nama ?? $this->email ?? "User Admin";
     }
 }

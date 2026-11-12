@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
 
             Auth::login($user);
 
-           return redirect(route('dashboard', absolute: false));
+            return redirect()->intended('/admin');
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
