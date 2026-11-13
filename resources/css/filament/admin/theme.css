@@ -1,0 +1,60 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@config '../../../../tailwind.config.js';
+
+
+/* =========================================================
+   1. PENGATURAN LIGHT MODE (TEMA TERANG)
+   ========================================================= */
+/* Sidebar */
+.fi-sidebar-header,
+.fi-sidebar-nav {
+    background-color: #6366f1 !important; /* Biru Indigo Terang */
+}
+/* Background Layar Utama & Header Atas */
+main.fi-main,
+.fi-page,
+.fi-topbar {
+    background-color: #eef2ff !important; /* Biru sangat muda */
+    border-bottom: none !important; /* Hilangkan garis header */
+}
+/* Kartu (Tabel, Form, Widget Angka) */
+.fi-section,
+.fi-ta-content,
+.fi-wi-stats-overview-stat {
+    background-color: #ffffff !important; /* Putih bersih */
+}
+/* Teks Menu Sidebar */
+.fi-sidebar-item-label,
+.fi-sidebar-item-icon {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+.fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-sidebar-item-active .fi-sidebar-item-icon {
+    color: #ffffff !important;
+    background-color: #0000 !important;
+}
+
+.fi-sidebar-item-active{
+    background-color: #0000 !important;
+}
+/* =========================================================
+   2. PENGATURAN DARK MODE (TEMA GELAP)
+   ========================================================= */
+/* Sidebar (Biru yang lebih gelap agar tidak silau) */
+.dark .fi-sidebar-header,
+.dark .fi-sidebar-nav {
+    background-color: #312e81 !important;
+}
+/* Background Layar Utama & Header Atas */
+.dark main.fi-main,
+.dark .fi-page,
+.dark .fi-topbar {
+    background-color: #111827 !important; /* Abu-abu sangat gelap (hitam) */
+}
+/* Kartu (Tabel, Form, Widget Angka) */
+.dark .fi-section,
+.dark .fi-ta-content,
+.dark .fi-wi-stats-overview-stat {
+    background-color: #1f2937 !important; /* Abu-abu gelap (untuk card) */
+    border-color: #374151 !important;
+}

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Roles extends Model {
     use HasUuids;
     protected $table = 'roles';
-    protected $primaryKey = 'id_role';
+    protected $primaryKey = 'id_roles';
     public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [

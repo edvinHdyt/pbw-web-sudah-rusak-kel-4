@@ -42,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     public function roles(): BelongsToMany {
         return $this->belongsToMany(
             Roles::class,
-            'users_roles',
+            'user_roles',
             'id_user',
             'id_role'
         )
