@@ -7,6 +7,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -30,6 +31,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->colors([
                 'primary' => Color::Amber,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make('Master Menu')
+                    ->collapsible(),
             ])
             ->defaultThemeMode(\Filament\Enums\ThemeMode::Light)
             // ->viteTheme('resources/css/filament/admin/theme.css')

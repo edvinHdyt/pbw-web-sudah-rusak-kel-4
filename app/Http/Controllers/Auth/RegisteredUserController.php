@@ -35,10 +35,13 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:50', 'unique:'.User::class],
-            'alamat' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name'       => ['required', 'string', 'max:255'],
+            'no_telepon' => ['required', 'string', 'max:20'],
+            'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'alamat'     => ['required', 'string'],
+            'password'   => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'email.unique'      => 'Akun dengan email ini sudah terdaftar.',
         ]);
 
         try {
