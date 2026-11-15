@@ -14,6 +14,7 @@ class DeviceResource extends Resource
 {
     protected static ?string $model = Device::class;
 
+    protected static ?string $navigationGroup  = 'Master Menu';
     protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
 
     protected static ?string $navigationLabel = 'Device Master';

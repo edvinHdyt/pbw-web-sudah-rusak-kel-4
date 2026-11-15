@@ -14,6 +14,7 @@ class PriceResource extends Resource
 {
     protected static ?string $model = Price::class;
 
+    protected static ?string $navigationGroup  = 'Master Menu';
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
 
     protected static ?string $navigationLabel = 'Harga Master';
