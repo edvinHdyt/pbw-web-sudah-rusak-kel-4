@@ -49,7 +49,7 @@
                     Selamat Datang
                 </h1>
                 <p class="text-base sm:text-lg text-gray-700 max-w-xl mx-auto font-light">
-                    Solusi perbaikan perangkat elektronik terpercaya, cepat, dan transparan untuk laptop, PC, dan gadget Anda.
+                    Lorem ipsum dolor sit amet
                 </p>
             </div>
         </section>
@@ -95,20 +95,14 @@
 
                 <!-- Feedback Notifications -->
                 @if(session('success'))
-                    <div class="max-w-2xl mx-auto mb-6 p-4 bg-green-50 border border-green-200 text-green-800 text-sm rounded-lg flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span>{{ session('success') }}</span>
+                    <div class="max-w-2xl mx-auto mb-6 p-4 bg-green-50 border border-green-200 text-green-800 text-sm rounded-lg text-center font-medium">
+                        {{ session('success') }}
                     </div>
                 @endif
 
                 @if($error)
-                    <div class="max-w-2xl mx-auto mb-6 p-4 bg-red-50 border border-red-200 text-red-800 text-sm rounded-lg flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                        </svg>
-                        <span>{{ $error }}</span>
+                    <div class="max-w-2xl mx-auto mb-6 p-4 bg-red-50 border border-red-200 text-red-800 text-sm rounded-lg text-center font-medium">
+                        {{ $error }}
                     </div>
                 @endif
 
@@ -385,50 +379,48 @@
 
                 <!-- Two Box Layout: Foto & Tulisan per Wireframe -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch mb-8">
-                    <!-- Foto Box -->
-                    <div class="bg-[#D9D9D9] rounded-xl p-8 min-h-[220px] flex flex-col items-center justify-center text-center shadow-sm">
-                        <div class="w-14 h-14 bg-gray-400/50 rounded-full flex items-center justify-center mb-3">
-                            <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-bold text-gray-800">Workshop & Teknisi</span>
-                        <p class="text-xs text-gray-600 mt-1">Peralatan modern & bersertifikasi</p>
+                    <!-- Foto Box (Sesuai Wireframe: Kotak Abu-Abu Bertuliskan Foto) -->
+                    <div class="bg-[#D9D9D9] rounded-xl min-h-[220px] sm:min-h-[260px] flex items-center justify-center text-center shadow-sm">
+                        <span class="text-xl sm:text-2xl font-normal text-gray-800 tracking-wide">
+                            Foto
+                        </span>
                     </div>
 
-                    <!-- Tulisan Box -->
+                    <!-- Tulisan Box (Sesuai Wireframe: Kotak Tulisan Deskripsi) -->
                     <div class="bg-[#EBEBEB] rounded-xl p-6 sm:p-8 flex flex-col justify-center shadow-sm">
-                        <h3 class="text-lg font-bold text-gray-900 mb-2">Pusat Servis SudahRusak</h3>
-                        <p class="text-sm text-gray-700 leading-relaxed mb-3">
-                            SudahRusak adalah penyedia jasa perbaikan perangkat elektronik terkemuka yang menangani kerusakan hardware dan software mulai dari laptop, PC, smartphone, monitor, hingga konsol game.
+                        <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2">
+                            Pusat Servis SudahRusak
+                        </h3>
+                        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed mb-3">
+                            SudahRusak adalah penyedia jasa perbaikan perangkat elektronik yang menangani berbagai kendala hardware dan software pada laptop, komputer desktop, printer, dan gadget Anda.
                         </p>
-                        <p class="text-sm text-gray-700 leading-relaxed">
-                            Kami mengedepankan kejujuran, garansi servis, dan estimasi waktu yang transparan yang bisa dilacak kapan saja oleh pelanggan secara online.
+                        <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                            Kami mengutamakan transparansi dan kepuasan pelanggan dengan jaminan garansi servis serta sistem pelacakan status perbaikan secara mandiri melalui nomor resi.
                         </p>
                     </div>
                 </div>
 
-                <!-- Galeri Servis (Sesuai Catatan Edvin di Wireframe) -->
+                <!-- Galeri Servis (Sesuai Catatan Wireframe: Tanpa Icon Emojis) -->
                 <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
-                    <h4 class="text-sm font-bold text-gray-800 mb-4 uppercase tracking-wider">
-                        Galeri Servis & Portofolio
-                    </h4>
+                    <h3 class="text-sm font-bold text-gray-800 mb-4 tracking-wider">
+                        Galeri Servis
+                    </h3>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="bg-gray-100 rounded-lg p-4 text-center border border-gray-200">
-                            <span class="text-2xl block mb-1">💻</span>
-                            <span class="text-xs font-semibold text-gray-800">Ganti LCD & Engsel</span>
+                        <div class="bg-[#D9D9D9] rounded-lg h-28 sm:h-32 flex flex-col items-center justify-center text-center p-3 border border-gray-300">
+                            <span class="text-sm font-medium text-gray-800">Foto 1</span>
+                            <span class="text-xs text-gray-600 mt-1">Servis Laptop</span>
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 text-center border border-gray-200">
-                            <span class="text-2xl block mb-1">⌨️</span>
-                            <span class="text-xs font-semibold text-gray-800">Keyboard & Touchpad</span>
+                        <div class="bg-[#D9D9D9] rounded-lg h-28 sm:h-32 flex flex-col items-center justify-center text-center p-3 border border-gray-300">
+                            <span class="text-sm font-medium text-gray-800">Foto 2</span>
+                            <span class="text-xs text-gray-600 mt-1">Ganti Keyboard</span>
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 text-center border border-gray-200">
-                            <span class="text-2xl block mb-1">⚡</span>
-                            <span class="text-xs font-semibold text-gray-800">Motherboard & IC Power</span>
+                        <div class="bg-[#D9D9D9] rounded-lg h-28 sm:h-32 flex flex-col items-center justify-center text-center p-3 border border-gray-300">
+                            <span class="text-sm font-medium text-gray-800">Foto 3</span>
+                            <span class="text-xs text-gray-600 mt-1">Motherboard & IC</span>
                         </div>
-                        <div class="bg-gray-100 rounded-lg p-4 text-center border border-gray-200">
-                            <span class="text-2xl block mb-1">❄️</span>
-                            <span class="text-xs font-semibold text-gray-800">Cleaning & Thermal Paste</span>
+                        <div class="bg-[#D9D9D9] rounded-lg h-28 sm:h-32 flex flex-col items-center justify-center text-center p-3 border border-gray-300">
+                            <span class="text-sm font-medium text-gray-800">Foto 4</span>
+                            <span class="text-xs text-gray-600 mt-1">Maintenance & Thermal</span>
                         </div>
                     </div>
                 </div>
@@ -446,7 +438,7 @@
                     <div class="w-32 sm:w-40 h-2.5 bg-[#D1D5DB] rounded-full mx-auto mt-2"></div>
                 </div>
 
-                <!-- Big Map Box per Wireframe -->
+                <!-- Big Map Box per Wireframe (Google Maps Embed) -->
                 <div class="bg-[#D9D9D9] rounded-2xl overflow-hidden shadow-sm border border-gray-300 relative min-h-[300px] sm:min-h-[360px] flex items-center justify-center">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126916.03541416972!2d106.92984955!3d-6.2447952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698c8c8305c45b%3A0x301576d14fed9d0!2sBekasi%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
@@ -473,40 +465,38 @@
                     <div class="w-32 sm:w-40 h-2.5 bg-[#D1D5DB] rounded-full mx-auto mt-2"></div>
                 </div>
 
-                <!-- Contact Info Cards -->
+                <!-- Contact Info Cards (Clean Typography - Tanpa Icon Emojis) -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <!-- WhatsApp / CS -->
-                    <div class="bg-white rounded-xl p-6 text-center shadow-sm">
-                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">💬</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">WhatsApp & Telepon</h4>
-                        <p class="text-xs text-gray-600 mb-2">Layanan Cepat Customer Service</p>
-                        <a href="https://wa.me/6281234567890" target="_blank" class="text-xs font-bold text-green-600 hover:underline">
+                    <div class="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wide">
+                            WhatsApp & Telepon
+                        </h3>
+                        <p class="text-xs text-gray-500 mb-3">Layanan Cepat Customer Service</p>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="text-sm font-bold text-gray-900 hover:text-blue-600 transition">
                             +62 812-3456-7890
                         </a>
                     </div>
 
                     <!-- Email Support -->
-                    <div class="bg-white rounded-xl p-6 text-center shadow-sm">
-                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">✉️</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">Email Resmi</h4>
-                        <p class="text-xs text-gray-600 mb-2">Konsultasi & Penawaran</p>
-                        <a href="mailto:support@sudahrusak.com" class="text-xs font-bold text-blue-600 hover:underline">
+                    <div class="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wide">
+                            Email Resmi
+                        </h3>
+                        <p class="text-xs text-gray-500 mb-3">Konsultasi & Informasi</p>
+                        <a href="mailto:support@sudahrusak.com" class="text-sm font-bold text-gray-900 hover:text-blue-600 transition">
                             support@sudahrusak.com
                         </a>
                     </div>
 
                     <!-- Jam Operasional -->
-                    <div class="bg-white rounded-xl p-6 text-center shadow-sm">
-                        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl">🕒</span>
-                        </div>
-                        <h4 class="font-bold text-gray-900 text-sm mb-1">Jam Operasional</h4>
-                        <p class="text-xs text-gray-600 mb-1">Senin - Sabtu: 09:00 - 20:00 WIB</p>
-                        <p class="text-xs text-gray-500">Minggu & Libur Nasional Tutup</p>
+                    <div class="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-200">
+                        <h3 class="font-bold text-gray-900 text-sm mb-1 uppercase tracking-wide">
+                            Jam Operasional
+                        </h3>
+                        <p class="text-xs text-gray-500 mb-1">Senin - Sabtu</p>
+                        <p class="text-sm font-bold text-gray-900">09:00 - 20:00 WIB</p>
+                        <p class="text-[11px] text-gray-400 mt-1">Minggu & Hari Libur Tutup</p>
                     </div>
                 </div>
             </div>
