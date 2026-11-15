@@ -36,6 +36,8 @@ class RegisteredUserController extends Controller
             'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'alamat'     => ['required', 'string'],
             'password'   => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'email.unique'      => 'Akun dengan email ini sudah terdaftar.',
         ]);
 
         $user = User::create([
