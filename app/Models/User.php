@@ -44,7 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
             Roles::class,
             'user_roles',
             'id_user',
-            'id_role'
+            'id_role',
+            'id_user',
+            'id_roles'
         )
         ->using(UserRoles::class)
         ->withPivot('id_user_role')
