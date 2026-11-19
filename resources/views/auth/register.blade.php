@@ -129,7 +129,7 @@
         <!-- Daftar Button -->
         <div class="pt-3">
             <button type="submit"
-                    class="w-full py-2.5 px-4 rounded-[4px] bg-[#BFBFBF] hover:bg-[#B3B3B3] active:bg-[#A6A6A6] border border-[#7F7F7F] text-sm font-normal text-black shadow-[0_2px_3px_rgba(0,0,0,0.2)] transition-colors text-center block">
+                    class="mt-4 w-full py-2 rounded-md hover:bg-gray-400 text-white text-sm transition bg-indigo-500">
                 Daftar
             </button>
         </div>
