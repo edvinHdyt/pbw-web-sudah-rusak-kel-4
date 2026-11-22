@@ -70,4 +70,11 @@ class PasswordResetTest extends TestCase
             return true;
         });
     }
+
+    public function test_password_reset_requires_valid_email_and_rejects_phone_number(): void
+    {
+        $response = $this->post('/forgot-password', ['email' => '081234567890']);
+
+        $response->assertSessionHasErrors('email');
+    }
 }

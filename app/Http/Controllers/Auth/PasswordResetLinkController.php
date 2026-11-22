@@ -27,21 +27,11 @@ class PasswordResetLinkController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $input = $request->input('email');
-
-        // If input is not an email, try resolving user by phone number
-        if ($input && !filter_var($input, FILTER_VALIDATE_EMAIL)) {
-            $user = User::where('no_telpon', $input)->first();
-            if ($user) {
-                $request->merge(['email' => $user->email]);
-            }
-        }
-
         $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string', 'email'],
         ], [
-            'email.email' => 'Nomor telepon atau email tidak valid.',
-            'email.required' => 'Email atau nomor telepon wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
         ]);
 
         $status = Password::sendResetLink(

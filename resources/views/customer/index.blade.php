@@ -27,7 +27,7 @@
                 <!-- Nav Menu -->
                 <nav class="flex items-center space-x-1 sm:space-x-3 text-sm font-medium">
                     <a href="#beranda"
-                       class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-1.5 rounded-full font-semibold shadow-sm transition">
+                       class="text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 px-3.5 py-1.5 rounded-full transition">
                         Beranda
                     </a>
                     <a href="#tentang-kami"
@@ -38,6 +38,17 @@
                        class="text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 px-3.5 py-1.5 rounded-full transition">
                         Kontak Kami
                     </a>
+                    @auth
+                        <a href="{{ route('dashboard') }}"
+                           class="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 text-white px-4 py-1.5 rounded-full font-semibold shadow-sm transition">
+                            Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                           class="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 text-white px-5 py-1.5 rounded-full font-semibold shadow-sm hover:shadow transition">
+                            Masuk
+                        </a>
+                    @endauth
                 </nav>
             </div>
         </header>

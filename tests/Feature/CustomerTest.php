@@ -18,6 +18,21 @@ class CustomerTest extends TestCase
         $response->assertSee('SudahRusak');
         $response->assertSee('Lacak Service');
         $response->assertSee('Tentang Kami');
+        $response->assertSee('Masuk');
+    }
+
+    public function test_customer_page_displays_login_button_for_guest_and_dashboard_for_auth_user(): void
+    {
+        // Guest sees Masuk button
+        $response = $this->get('/');
+        $response->assertSee(route('login'));
+        $response->assertSee('Masuk');
+
+        // Authenticated user sees Dashboard button
+        $user = \App\Models\User::factory()->create();
+        $responseAuth = $this->actingAs($user)->get('/');
+        $responseAuth->assertSee(route('dashboard'));
+        $responseAuth->assertSee('Dashboard');
     }
 
     public function test_customer_can_track_service_with_valid_receipt_number(): void
