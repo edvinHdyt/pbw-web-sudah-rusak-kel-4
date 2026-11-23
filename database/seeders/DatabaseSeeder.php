@@ -7,6 +7,7 @@ use App\Models\Roles;
 use App\Models\UserRoles;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -22,17 +23,58 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create test user if not exists
-        if (!User::where('email', 'test@example.com')->exists()) {
+        if (!User::where('email', 'suadmin@gmail.com')->exists()) {
             $user = User::create([
-                'nama' => 'Test User',
-                'email' => 'test@example.com',
+                'nama' => 'John Su',
+                'email' => 'suadmin@gmail.com',
                 'password' => Hash::make('password'),
                 'no_telpon' => '081234567890',
                 'alamat' => 'Bekasi',
+                'email_verified_at' => Date::now()
             ]);
 
             // Assign admin role to test user
-            $adminRole = Roles::where('nama_role', 'admin')->first();
+            $adminRole = Roles::where('nama_role', 'Super Admin')->first();
+            if ($adminRole) {
+                UserRoles::create([
+                    'id_user' => $user->id_user,
+                    'id_role' => $adminRole->id_roles,
+                ]);
+            }
+        }
+
+        if (!User::where('email', 'admin@gmail.com')->exists()) {
+            $user = User::create([
+                'nama' => 'Jane Min',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('password'),
+                'no_telpon' => '081234567890',
+                'alamat' => 'Bekasi',
+                'email_verified_at' => Date::now()
+            ]);
+
+            // Assign admin role to test user
+            $adminRole = Roles::where('nama_role', 'Admin')->first();
+            if ($adminRole) {
+                UserRoles::create([
+                    'id_user' => $user->id_user,
+                    'id_role' => $adminRole->id_roles,
+                ]);
+            }
+        }
+
+        if (!User::where('email', 'teknisi@gmail.com')->exists()) {
+            $user = User::create([
+                'nama' => 'Karsa',
+                'email' => 'teknisi@gmail.com',
+                'password' => Hash::make('password'),
+                'no_telpon' => '081234567890',
+                'alamat' => 'Bekasi',
+                'email_verified_at' => Date::now()
+            ]);
+
+            // Assign admin role to test user
+            $adminRole = Roles::where('nama_role', 'Teknisi')->first();
             if ($adminRole) {
                 UserRoles::create([
                     'id_user' => $user->id_user,
