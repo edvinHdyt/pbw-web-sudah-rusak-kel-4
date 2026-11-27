@@ -537,9 +537,6 @@
         },
         {
             "name": "doctrine/dbal",
-<<<<<<< HEAD
-            "version": "4.5.1",
-=======
             "version": "4.6.0",
             "source": {
                 "type": "git",
@@ -696,7 +693,6 @@
         {
             "name": "doctrine/inflector",
             "version": "2.1.0",
->>>>>>> origin/fatimah
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
@@ -6038,8 +6034,6 @@
         {
             "name": "symfony/html-sanitizer",
             "version": "v7.4.23",
-<<<<<<< HEAD
-=======
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/html-sanitizer.git",
@@ -6114,7 +6108,6 @@
         {
             "name": "symfony/http-foundation",
             "version": "v7.4.21",
->>>>>>> origin/fatimah
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/html-sanitizer.git",
