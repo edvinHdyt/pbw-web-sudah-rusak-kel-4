@@ -9,7 +9,7 @@ use Override;
 class Dashboard extends BaseDashboard{
 
     public function getHeading(): string | Htmlable{
-      return "Dashbard";
+      return "Dashboard";
     }
 
     #[Override]
